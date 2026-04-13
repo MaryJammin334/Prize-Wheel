@@ -105,6 +105,26 @@
     border-radius: 18px;
     padding: 24px;
     width: 280px;
+    display: none;
+  }
+  .editor.open { display: block; }
+  .edit-toggle-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 8px 22px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    letter-spacing: 1px;
+  }
+  .edit-toggle-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(247,201,72,0.06);
   }
   .editor h2 {
     font-family: 'Boogaloo', cursive;
@@ -214,9 +234,10 @@
       <div class="hub"></div>
     </div>
     <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN!</button>
+    <button class="edit-toggle-btn" onclick="toggleEditor()">✏️ Edit Wheel</button>
   </div>
 
-  <div class="editor">
+  <div class="editor" id="editor">
     <h2>✏️ Edit Segments</h2>
     <p>Change labels or colors, then click Apply.</p>
     <div class="segment-list" id="segList"></div>
@@ -552,6 +573,11 @@ function applyEdits() {
     segments[i].label = textIn.value || 'Prize';
   });
   drawWheel(currentAngle);
+}
+
+function toggleEditor() {
+  const editor = document.getElementById('editor');
+  editor.classList.toggle('open');
 }
 
 buildEditor();
